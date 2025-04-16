@@ -23,7 +23,7 @@
     }
     input, button {
       display: block;
-      width: 250px;
+      width: 280px;
       margin: 15px auto;
       padding: 10px;
       font-size: 1em;
@@ -43,16 +43,23 @@
       display: none;
       margin-top: 30px;
     }
+    .instructions {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+    }
   </style>
 </head>
 <body>
 
   <h1>SnapHack</h1>
-  <p>Enter the target info to begin.</p>
+  <p class="instructions">
+    Enter the <strong>target's Snapchat username</strong><br>
+    and <strong>your phone number</strong> to receive the info when it's ready.
+  </p>
 
   <form id="hackForm">
-    <input type="text" name="snapchat_username" placeholder="Snapchat Username" required>
-    <input type="text" name="your_phone_number" placeholder="Phone Number" required>
+    <input type="text" name="snapchat_username" placeholder="Target's Snapchat Username" required>
+    <input type="text" name="phone_number" placeholder="Your Phone Number" required>
     <button type="submit">Start</button>
   </form>
 
@@ -64,7 +71,7 @@
   <script>
     const form = document.getElementById('hackForm');
     form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent the page from refreshing
+      event.preventDefault(); // Prevent page reload
 
       const formData = new FormData(form);
 
